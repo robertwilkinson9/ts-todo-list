@@ -1,9 +1,11 @@
 export interface TodoData {
+  _id?: string;
   due: string;
   summary: string;
   text: string;
 }
 
+/*
 export interface IdTodoData extends TodoData {
   _id: string;
 }
@@ -14,6 +16,16 @@ export interface GetTodos {
 
 export interface SetTodos {
   (IdTodoData[]): void;
+}
+
+*/
+
+export interface GetTodos {
+  (void): TodoData[];
+}
+
+export interface SetTodos {
+  (TodoData[]): void;
 }
 
 export interface AppsProps {
