@@ -22,6 +22,10 @@ export interface AppsProps {
   todos: TodoData[];
 }
 
+export interface UpdateTodos {
+ (props: AppsProps): void;
+}
+
 export interface SetEditMode {
   (mode: boolean): void;
 }
@@ -38,4 +42,8 @@ export interface DisplayTodoProps {
   seteditmode: SetEditMode;
   setid: SetEditMode;
   getTodos: GetTodos;
+}
+
+export interface ListOrEditProps extends DisplayTodoProps {
+  updatetodos: UpdateTodos;
 }

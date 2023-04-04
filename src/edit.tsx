@@ -3,7 +3,8 @@ import {DisplayTodoProps} from './interfaces';
 import './edit.css';
 
 const Edit = (props: DisplayTodoProps) => {
-  const [todos, edit_id, setid, index, updater, seteditmode] = [props.todos, props.edit_id, props.setid, props.index, props.updater, props.seteditmode];
+  // const [todos, edit_id, setid, index, updater, seteditmode] = [props.todos, props.edit_id, props.setid, props.index, props.updater, props.seteditmode];
+  const [todos, edit_id, setid, updater, seteditmode] = [props.todos, props.edit_id, props.setid, props.updater, props.seteditmode];
   console.log("EDIT edit_id is ", props.edit_id);
   console.log("Edit TODOs is ", JSON.stringify(props.todos));
 
@@ -11,12 +12,13 @@ const Edit = (props: DisplayTodoProps) => {
   console.log("todoToEdit is ", JSON.stringify(todoToEdit));
 
   let todo = {};
-  if (index < 0) {
+  if (edit_id < 0) {
+  //if (index < 0) {
   // new element
   console.log("length of todos is ", todos.length);
-  const last_index = todos.length - 1;
-  const last_todo = todos[last_index]
-  console.log("last id of todos is ", last_todo.id);
+  //const last_index = todos.length - 1;
+  //const last_todo = todos[last_index]
+  //console.log("last id of todos is ", last_todo.id);
   console.log("ADDING new element to todos");
   } else {
   todo = todoToEdit[0];
