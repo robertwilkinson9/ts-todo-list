@@ -1,12 +1,11 @@
 import './Banner.css';
-import {BannerProps} from "./interfaces";
+import image from "./sticky-todo.jpg";
 
-function Banner(props: BannerProps) {
-  console.log("Banner image is ", props.image);
+function Banner() {
   return (
     <div className="Banner">
       <header className="Banner-header">
-        <img src={props.image} className="Banner-todo" alt="where is my?" width={250} height={250} />
+        <img src={image} className="Banner-todo" alt="where is my?" width={250} height={250} />
         <p>
 	  My TODO list
         </p>

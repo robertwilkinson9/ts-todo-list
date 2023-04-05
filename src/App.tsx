@@ -90,7 +90,7 @@ function App() {
 
   return (
 	<div>
-	  <Banner image="./sticky-todo.jpg" /> 
+	  <Banner /> 
           <ListOrEditPage edit_mode={edit_mode} seteditmode={setEditMode} todos={todos} setter={setTodos} add_todo={add_todo} updater={onUpdate} edit_id={edit_id} setid={setEditId} getTodos={get_todos} />
 	</div>
   );
