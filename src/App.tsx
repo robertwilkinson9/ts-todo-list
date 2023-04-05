@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Banner from './Banner';
 import ListOrEditPage from './list_or_edit_page';
 import './App.css';
-import {TodoData, AppsProps} from './interfaces';
+import {RawTodoData, TodoData, AppsProps} from './interfaces';
 
 function App() {
   const [todos, setTodos] = useState<TodoData[]>([]);
-  const [edit_id, setEditId] = useState<number>(-1);
+  const [edit_id, setEditId] = useState<string>("-1");
   const [edit_mode, setEditMode] = useState<boolean>(false);
   const API_url = 'http://localhost:5000/api/';
   const TODO_url = API_url + 'todo/';
@@ -31,7 +31,7 @@ function App() {
     }, []);
   console.log("after useEffect App and TODOS are ", JSON.stringify(todos));
 
-  const add_todo = (newtodo: TodoData) => {
+  const add_todo = (newtodo: RawTodoData) => {
     console.log("ADD_TODO and newtodo is ", JSON.stringify(newtodo));
     fetch(TODO_url, {
       method: 'POST',
@@ -57,7 +57,7 @@ function App() {
 	console.log("App onUpdate and TODO is ", JSON.stringify(props.todo));
         const [id, todo] = [props.edit_id, props.todo];
 	console.log("App onUpdate and ID is ", id);
-        if ((id === undefined) || (id === -1)) { // new todo
+        if ((id === undefined) || (id === "-1")) { // new todo
           const due = todo.due;
           const summary = todo.summary;
           const text = todo.text;
@@ -82,7 +82,7 @@ function App() {
              .catch((err) => {console.log(err.message);});
           setTodos(props.todos);
         }
-        setEditId(-1);
+        setEditId("-1");
         setEditMode(false);      
         setTodos(props.todos);
 	console.log("App onUpdate at end of function TODOS are ", JSON.stringify(todos));
@@ -90,7 +90,7 @@ function App() {
 
   return (
 	<div>
-	  <Banner /> 
+	  <Banner image="./sticky-todo.jpg" /> 
           <ListOrEditPage edit_mode={edit_mode} seteditmode={setEditMode} todos={todos} setter={setTodos} add_todo={add_todo} updater={onUpdate} edit_id={edit_id} setid={setEditId} getTodos={get_todos} />
 	</div>
   );

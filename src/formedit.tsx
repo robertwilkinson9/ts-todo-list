@@ -1,11 +1,8 @@
 import React, { useState } from "react";
+import {FormEditProps} from './interfaces';
 import './edit.css';
 
-{/*
-import React from "react";
-*/}
-
-const Edit = (props) => {
+const Edit = (props: FormEditProps) => {
   const [todos, edit_id, setid, index, add_todo, updater, seteditmode] = [props.todos, props.edit_id, props.setid, props.index, props.add_todo, props.updater, props.seteditmode];
   console.log("EDIT edit_id is ", props.edit_id);
   console.log("Edit TODOs is ", JSON.stringify(props.todos));
@@ -13,25 +10,20 @@ const Edit = (props) => {
   const todoToEdit = todos.filter((todo) => todo._id === edit_id );
   console.log("todoToEdit is ", JSON.stringify(todoToEdit));
 
-  let todo = {};
-  if (index < 0) {
+    let initialValues = {
+     due: "",
+     summary: "",
+     text: "",
+    };
+  if (index === "-1") {
   // new element
   console.log("length of todos is ", todos.length);
   const last_index = todos.length - 1;
   const last_todo = todos[last_index]
-  console.log("last id of todos is ", last_todo.id);
+  console.log("last id of todos is ", last_todo._id);
   console.log("ADDING new element to todos");
   } else {
-  todo = todoToEdit[0];
-  }
-
-  let initialValues = {
-     due: "",
-     summary: "",
-     text: "",
-  };
-
-  if (todo) {
+    const todo = todoToEdit[0];
     initialValues = {
       due: todo.due,
       summary: todo.summary,
@@ -41,45 +33,14 @@ const Edit = (props) => {
 
   const [values, setValues] = useState(initialValues);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({
       ...values,
       [name]: value,
     });
-    updater( { edit_id: edit_id, due: values.due, summary: values.summary, text: values.text, todos: todos } )
+    updater( { edit_id: edit_id, todo: {due: values.due, summary: values.summary, text: values.text}, todos: todos } )
   };
-
-{ /*
-  let initDT=""
-  let initSumm=""
-  let initText=""
-  if (todo) {
-   console.log("and TODO is ", JSON.stringify(todo));
-   initDT=todo.due
-   initSumm=todo.summary
-   initText=todo.text
-  }
-  console.log("initDT is ", initDT);
-  console.log("initSumm is ", initSumm);
-  console.log("initText is ", initText);
-  
-  const [due, setDuedate] = React.useState(initDT);
-  const [summary, setSummary] = React.useState(initSumm);
-  const [text, setText] = React.useState(initText);
-
-  const handleDuedate = (event) => {
-    setDuedate(event.target.value);
-  };
-
-  const handleSummary = (event) => {
-    setSummary(event.target.value);
-  };
-
-  const handleText = (event) => {
-    setText(event.target.value);
-  };
-*/ }
 
 { /*
   function getPropertyName(obj, expression) {
@@ -177,63 +138,64 @@ console.log(test4);    // -> 'property4'
 
 */}
 
+  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("VALUE is " + event.target.value);
+    if (event.target.value === "cancel") {
+      event.preventDefault();
+      console.log("Edit handleCancel PROPS is ", JSON.stringify(props));
+      setid("-1");
+      seteditmode(false)
+    } else {
+      console.log("Edit handleSubmit PROPS is ", JSON.stringify(props));
+      console.log("Edit handleSubmit PROPS.TODOS is ", JSON.stringify(props.todos));
+      event.preventDefault();
+      let _id = edit_id;
+      let newtodo = { _id: _id, due: values.due, summary: values.summary, text: values.text };
+      console.log("Edit handleSubmit NEWTODO is ", JSON.stringify(newtodo));
+      let newTodos = props.todos.filter(todo => {return todo._id !== edit_id});
+      newTodos.push(newtodo);
+      // const newlist = {...props.todos, newtodo };
+      console.log("Edit handleSubmit NEWTODOS is ", JSON.stringify(newTodos));
+      updater( { todos: newTodos, todo: newtodo, edit_id: edit_id } );
+    }
+  }
+
+{ /*
   const handleCancel = event => {
     event.preventDefault();
     console.log("Edit handleCancel PROPS is ", JSON.stringify(props));
     setid(-1);
     seteditmode(false)
   }
+*/ }
 
   return (
 	  <>
     <div className="edit">
         <form>
+          <label htmlFor="due">Due datetime</label>
           <input
             value={values.due}
             onChange={handleInputChange}
             name="due"
-            label="Due date"
           />
+          <label htmlFor="summary">Summary</label>
           <input
             value={values.summary}
             onChange={handleInputChange}
             name="summary"
-            label="Summary"
           />
+          <label htmlFor="text">Text</label>
           <input
             value={values.text}
             onChange={handleInputChange}
             name="text"
-            label="Text"
           />
-          <button type="submit"> Submit </button>
+          <button type="submit" value="submit"> Submit </button>
         </form>
     </div>
 	  </>
   );
 }
-
-{ /*
-    <div className="edit">
-        </form>
-	  <form onSubmit={handleSubmit} onCancel={handleCancel}>
-          <fieldset>
-          <table><tbody>
-          <tr><td>
-	  <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleDuedate}/>
-          </td></tr>
-          <tr><td>
-	  <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" value={summary} onChange={handleSummary} />
-          </td></tr>
-          <tr><td>
-	  <label htmlFor="text">Text</label></td><td><input type ="text" id="text" value={text} onChange={handleText} />
-          </td></tr>
-          </tbody></table>
-          </fieldset>
-	  <button type="submit">Add Todo Item</button>
-          <button type="submit" onClick={handleCancel}>Cancel</button>
-	  </form>
-    </div>
-*/ }
 
 export default Edit;

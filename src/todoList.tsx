@@ -1,10 +1,11 @@
 import DisplayTodos from "./displayTodos";
 import "./todoList.css"
+import {TodoListProps} from "./interfaces";
 
-const TodoList = (props) => {
+const TodoList = (props: TodoListProps) => {
   console.log("TODO LIST todos is ", JSON.stringify(props.todos));
 
-  const UpdateEditMode = (props) => {
+  const UpdateEditMode = (props: TodoListProps) => {
     props.seteditmode(true);
   };
 
