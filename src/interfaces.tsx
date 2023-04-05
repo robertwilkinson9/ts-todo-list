@@ -11,7 +11,7 @@ export interface IdTodoData extends TodoData {
 }
 
 export interface GetTodos {
-  (void): IdTodoData[];
+  (void): TodoData[];
 }
 
 export interface SetTodos {
@@ -21,11 +21,15 @@ export interface SetTodos {
 */
 
 export interface GetTodos {
-  (void): TodoData[];
+  (void): void;
 }
 
 export interface SetTodos {
   (TodoData[]): void;
+}
+
+export interface AddTodo {
+  (TodoData): void;
 }
 
 export interface AppsProps {
@@ -52,10 +56,18 @@ export interface DisplayTodoProps {
   todos: IdTodoData[];
   setter: SetTodos;
   seteditmode: SetEditMode;
-  setid: SetEditMode;
+  setid: SetId;
   getTodos: GetTodos;
 }
 
-export interface ListOrEditProps extends DisplayTodoProps {
-  updatetodos: UpdateTodos;
+export interface ListOrEditProps {
+  edit_mode: boolean;
+  seteditmode: SetEditMode;
+  todos: IdTodoData[];
+  setter: SetTodos;
+  add_todo: AddToDo;
+  updater: UpdateTodos;
+  edit_id: number;
+  setid: SetId;
+  getTodos: GetTodos;
 }
