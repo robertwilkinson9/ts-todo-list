@@ -3,7 +3,7 @@ import "./todoList.css"
 import {TodoListProps} from "./interfaces";
 
 const TodoList = (props: TodoListProps) => {
-  console.log("TODO LIST todos is ", JSON.stringify(props.todos));
+  //console.log("TODO LIST todos is ", JSON.stringify(props.todos));
 
   const UpdateEditMode = (props: TodoListProps) => {
     props.seteditmode(true);

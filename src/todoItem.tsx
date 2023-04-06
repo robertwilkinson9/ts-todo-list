@@ -3,9 +3,9 @@ import {todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
   const [todo, todos, setTodos] = [props.todo, props.todos, props.setter]
-  console.log("TodoItem todos are ", JSON.stringify(todos));
-  console.log("TodoItem todo ", JSON.stringify(todo));
-  const id = todo._id;
+  //console.log("TodoItem todos are ", JSON.stringify(todos));
+  //console.log("TodoItem todo ", JSON.stringify(todo));
+  // const id = todo._id;
 
   // pass these down from App.js - but test for now.
   const API_url = 'http://localhost:5000/api/';

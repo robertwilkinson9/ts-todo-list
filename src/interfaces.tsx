@@ -70,13 +70,14 @@ export interface DisplayTodoProps extends TodoListProps{
 }
 
 export interface EditProps {
-  todos: TodoData[];
+  due: string;
+  summary:string;
+  text: string;
   edit_id: string;
   setid: SetId;
-  setter: SetTodos;
-  add_todo: AddTodo;
-  updater: UpdateTodos;
   seteditmode: SetEditMode;
+  todos: TodoData[];
+  updater: UpdateTodos;
 }
 
 export interface FormEditProps extends EditProps {

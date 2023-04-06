@@ -11,7 +11,7 @@ function App() {
   const API_url = 'http://localhost:5000/api/';
   const TODO_url = API_url + 'todo/';
 
-  console.log("before useEffect App and TODOS are ", JSON.stringify(todos));
+  //console.log("before useEffect App and TODOS are ", JSON.stringify(todos));
 
   const get_todos = () => {
     // Change this endpoint to whatever local or online address you have
@@ -29,7 +29,7 @@ function App() {
     useEffect(() => {
         get_todos();
     }, []);
-  console.log("after useEffect App and TODOS are ", JSON.stringify(todos));
+  //console.log("after useEffect App and TODOS are ", JSON.stringify(todos));
 
   const add_todo = (newtodo: RawTodoData) => {
     console.log("ADD_TODO and newtodo is ", JSON.stringify(newtodo));
