@@ -3,7 +3,8 @@ import {EditProps} from './interfaces';
 import './edit.css';
 
 const Edit = (props: EditProps) => {
-  const [initDT, initSumm, initText, edit_id, setid, seteditmode, todos, updater] = [props.due, props.summary, props.text, props.edit_id, props.setid, props.seteditmode, props.todos, props.updater];
+  console.log("Edit START PROPS are ", JSON.stringify(props));
+  const [initDT, initSumm, initText, edit_id, setid, seteditmode, todos, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.edit_id, props.setid, props.seteditmode, props.todos, props.updater];
 
   const [due, setDuedate] = React.useState(initDT);
   const [summary, setSummary] = React.useState(initSumm);

@@ -2,9 +2,12 @@ import React from "react";
 import {todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
-  const [todo, todos, setTodos] = [props.todo, props.todos, props.setter]
-  //console.log("TodoItem todos are ", JSON.stringify(todos));
-  //console.log("TodoItem todo ", JSON.stringify(todo));
+  console.log("TodoItem props are ", JSON.stringify(props));
+  const [edit_id, todo, todos, setTodos] = [props.edit_id, props.todo, props.todos, props.setter]
+  if ((props.edit_id !== undefined) && (props.edit_id !== "-1")) {
+    props.todo._id = props.edit_id;
+  }
+  console.log("TodoItem todo ", JSON.stringify(todo));
   // const id = todo._id;
 
   // pass these down from App.js - but test for now.
@@ -37,20 +40,32 @@ const TodoItem = (props: todoItemProps) => {
 
   const DeleteTodo = (props: todoItemProps) => {
     const id = props.todo._id;
-    console.log("DeleteTodo -> deleting ", id);
-    DeleteMongoTodo(props);
-    console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
-    const newtodos = todos.filter(todo => {return todo._id !== id});
-    console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
-    setTodos(newtodos);
+    if ((id ! === undefined) && (id !== "-1")) {
+      console.log("DeleteTodo -> deleting ", id);
+      DeleteMongoTodo(props);
+      console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
+      const newtodos = todos.filter(todo => {return todo._id !== id});
+      console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
+      setTodos(newtodos);
+    } else {
+      setTodos(props.todos);
+    }
   };
 
+{ /*
+  const UpdateEditId = (_id: string, props: todoItemProps) => {
+    console.log("UpdateEditId -> passed ID is ", _id);
+*/ }
   const UpdateEditId = (props: todoItemProps) => {
     console.log("UpdateEditId -> props are ", JSON.stringify(props));
     const [todo, setId, setEditMode] = [props.todo, props.setid, props.seteditmode]
     const id = todo._id;
-    console.log("UpdateEditId -> id is ", id);
-    setId(id);
+    if (id) {
+      console.log("UpdateEditId -> id is ", id);
+      setId(id);
+      console.log("UpdateEditId -> todo is ", JSON.stringify(todo));
+      console.log("UpdateEditId -> props are ", JSON.stringify(props));
+    }
     setEditMode(true);
   };
 
@@ -65,6 +80,9 @@ const TodoItem = (props: todoItemProps) => {
 	</button>
       </td>
       <td>
+{ /*
+      	<button className="btn btn-primary" onClick={() => UpdateEditId(todo._id, props)}> Edit
+*/ }
       	<button className="btn btn-primary" onClick={() => UpdateEditId(props)}> Edit
 	</button>
       </td>

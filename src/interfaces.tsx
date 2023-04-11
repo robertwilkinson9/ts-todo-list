@@ -5,7 +5,7 @@ export interface RawTodoData {
 }
 
 export interface TodoData extends RawTodoData {
-  _id: string;
+  _id?: string;
 }
 
 export interface GetTodos {
@@ -34,6 +34,9 @@ export interface todoItemProps {
   seteditmode: SetEditMode;
   setid: SetId;
   getTodos?: GetTodos;
+  due?: string;
+  summary?: string;
+  text?: string;
 }
 
 export interface UpdateTodos {
@@ -70,9 +73,7 @@ export interface DisplayTodoProps extends TodoListProps{
 }
 
 export interface EditProps {
-  due: string;
-  summary:string;
-  text: string;
+  todo: TodoData;
   edit_id: string;
   setid: SetId;
   seteditmode: SetEditMode;
