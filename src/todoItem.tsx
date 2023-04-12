@@ -1,5 +1,6 @@
 import React from "react";
 import {todoItemProps} from './interfaces';
+// import {maybeString, todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
   console.log("TodoItem props are ", JSON.stringify(props));
@@ -14,12 +15,12 @@ const TodoItem = (props: todoItemProps) => {
   const API_url = 'http://localhost:5000/api/';
   const TODO_url = API_url + 'todo/';
 
-  const DeleteMongoTodo = (props: todoItemProps) => {
-    const id = props.todo._id;
-    console.log("DeleteMongoTodo -> ID is ", id);
-    const this_TODO_url = TODO_url + id;
-    console.log("DeleteMongoTodo -> url is ", this_TODO_url);
-    fetch(this_TODO_url, {
+  const DeleteMongoTodo = (_id: string) => {
+    console.log("DeleteMongoTodo -> ID is ", _id);
+    const delete_TODO_url = TODO_url + _id;
+
+    console.log("DeleteMongoTodo -> url is ", delete_TODO_url);
+    fetch(delete_TODO_url, {
       method: 'DELETE',
       headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -38,13 +39,13 @@ const TodoItem = (props: todoItemProps) => {
 
   // all the above should be in a top level mongo db file and passed down as props?
 
-  const DeleteTodo = (props: todoItemProps) => {
-    const id = props.todo._id;
-    if ((id ! === undefined) && (id !== "-1")) {
-      console.log("DeleteTodo -> deleting ", id);
-      DeleteMongoTodo(props);
+  const DeleteTodo = (props: todoItemProps, _id: string | undefined) => {
+    if (_id) {
+      console.log("DeleteTodo -> passed ID is ", _id);
+      console.log("DeleteTodo -> deleting ", _id);
+      DeleteMongoTodo(_id);
       console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
-      const newtodos = todos.filter(todo => {return todo._id !== id});
+      const newtodos = todos.filter(todo => {return todo._id !== _id});
       console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
       setTodos(newtodos);
     } else {
@@ -75,7 +76,10 @@ const TodoItem = (props: todoItemProps) => {
       <td>{todo.summary}</td>
       <td>{todo.text}</td>
       <td>
+{ /*
       	<button className="btn btn-primary" onClick={() => DeleteTodo(props)}>
+*/ }
+      	<button className="btn btn-primary" onClick={() => DeleteTodo(props, todo._id)}>
        	 Delete
 	</button>
       </td>
