@@ -1,5 +1,6 @@
 import React from "react";
 import {todoItemProps} from './interfaces';
+import {deleteItem} from './fetch';
 
 const TodoItem = (props: todoItemProps) => {
   console.log("TodoItem props are ", JSON.stringify(props));
@@ -18,28 +19,13 @@ const TodoItem = (props: todoItemProps) => {
     const delete_TODO_url = TODO_url + _id;
 
     console.log("DeleteMongoTodo -> url is ", delete_TODO_url);
-    fetch(delete_TODO_url, {
-      method: 'DELETE',
-      headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("delete data is ");
-      console.log(data);
-      // Handle data
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    deleteItem(delete_TODO_url);
   };
 
   // all the above should be in a top level mongo db file and passed down as props?
 
   const DeleteTodo = (props: todoItemProps, _id: string | undefined) => {
     if (_id) {
-      console.log("DeleteTodo -> passed ID is ", _id);
       console.log("DeleteTodo -> deleting ", _id);
       DeleteMongoTodo(_id);
       console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
@@ -52,15 +38,12 @@ const TodoItem = (props: todoItemProps) => {
   };
 
   const UpdateEditId = (props: todoItemProps, _id: string | undefined) => {
-    console.log("UpdateEditId -> passed ID is ", _id);
     console.log("UpdateEditId -> props are ", JSON.stringify(props));
     const [todo, setId, setEditMode] = [props.todo, props.setid, props.seteditmode]
     if (_id) {
       console.log("UpdateEditId -> _id is ", _id);
       setId(_id);
     }
-    console.log("UpdateEditId -> todo is ", JSON.stringify(todo));
-    console.log("UpdateEditId -> props are ", JSON.stringify(props));
     setEditMode(true);
   };
 

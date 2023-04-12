@@ -1,5 +1,6 @@
 import React from "react";
-import {RawTodoData, TodoData, AppsProps} from './interfaces';
+import {RawTodoData} from './interfaces';
+//import {RawTodoData, TodoData, AppsProps} from './interfaces';
 
 export const get_all = (url: string) => {
   fetch(url)
