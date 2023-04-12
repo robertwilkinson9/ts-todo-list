@@ -1,6 +1,5 @@
 import React from "react";
 import {todoItemProps} from './interfaces';
-// import {maybeString, todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
   console.log("TodoItem props are ", JSON.stringify(props));
@@ -9,7 +8,6 @@ const TodoItem = (props: todoItemProps) => {
     props.todo._id = props.edit_id;
   }
   console.log("TodoItem todo ", JSON.stringify(todo));
-  // const id = todo._id;
 
   // pass these down from App.js - but test for now.
   const API_url = 'http://localhost:5000/api/';
@@ -53,20 +51,16 @@ const TodoItem = (props: todoItemProps) => {
     }
   };
 
-{ /*
-  const UpdateEditId = (_id: string, props: todoItemProps) => {
+  const UpdateEditId = (props: todoItemProps, _id: string | undefined) => {
     console.log("UpdateEditId -> passed ID is ", _id);
-*/ }
-  const UpdateEditId = (props: todoItemProps) => {
     console.log("UpdateEditId -> props are ", JSON.stringify(props));
     const [todo, setId, setEditMode] = [props.todo, props.setid, props.seteditmode]
-    const id = todo._id;
-    if (id) {
-      console.log("UpdateEditId -> id is ", id);
-      setId(id);
-      console.log("UpdateEditId -> todo is ", JSON.stringify(todo));
-      console.log("UpdateEditId -> props are ", JSON.stringify(props));
+    if (_id) {
+      console.log("UpdateEditId -> _id is ", _id);
+      setId(_id);
     }
+    console.log("UpdateEditId -> todo is ", JSON.stringify(todo));
+    console.log("UpdateEditId -> props are ", JSON.stringify(props));
     setEditMode(true);
   };
 
@@ -76,19 +70,10 @@ const TodoItem = (props: todoItemProps) => {
       <td>{todo.summary}</td>
       <td>{todo.text}</td>
       <td>
-{ /*
-      	<button className="btn btn-primary" onClick={() => DeleteTodo(props)}>
-*/ }
-      	<button className="btn btn-primary" onClick={() => DeleteTodo(props, todo._id)}>
-       	 Delete
-	</button>
+         <button className="btn btn-primary" onClick={() => DeleteTodo(props, todo._id)}>Delete</button>
       </td>
       <td>
-{ /*
-      	<button className="btn btn-primary" onClick={() => UpdateEditId(todo._id, props)}> Edit
-*/ }
-      	<button className="btn btn-primary" onClick={() => UpdateEditId(props)}> Edit
-	</button>
+        <button className="btn btn-primary" onClick={() => UpdateEditId(props, todo._id)}>Edit</button>
       </td>
     </tr>
   );
