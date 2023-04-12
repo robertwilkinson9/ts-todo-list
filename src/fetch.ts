@@ -1,6 +1,5 @@
 import React from "react";
 import {RawTodoData} from './interfaces';
-//import {RawTodoData, TodoData, AppsProps} from './interfaces';
 
 export const get_all = (url: string) => {
   fetch(url)
@@ -9,7 +8,11 @@ export const get_all = (url: string) => {
     })
     .then((data) => {
       // Handle data
-    });
+      console.log("get_all data is ");
+      console.log(data.data);
+      return data.data;
+    })
+   .catch((err) => {console.log(err.message);});
 };
 
 export const deleteItem = (url: string) => {
@@ -23,12 +26,11 @@ export const deleteItem = (url: string) => {
   .then((response) => response.json())
   .then((data) => {
     console.log("delete data is ");
-    console.log(data);
+    console.log(data.data);
     // Handle data
+    return data.data;
   })
-  .catch((err) => {
-    console.log(err.message);
-  });
+  .catch((err) => {console.log(err.message);});
 };
 
 export const add_todo = (url: string, newtodo: RawTodoData) => {
@@ -43,11 +45,10 @@ export const add_todo = (url: string, newtodo: RawTodoData) => {
   .then((data) => {
     console.log("------------add_todo returned data is");
     // Handle data
-    console.log(data);
+    console.log(data.data);
+    return data.data;
   })
-  .catch((err) => {
-    console.log(err.message);
-  });
+  .catch((err) => {console.log(err.message);});
 };
 
 export const update_todo = (url: string, todo: RawTodoData) => {
@@ -63,8 +64,9 @@ export const update_todo = (url: string, todo: RawTodoData) => {
   .then((response) => response.json())
   .then((data) => {
     console.log("PUT data is");
-    console.log(data);
+    console.log(data.data);
     // Handle data
+    return data.data;
   })
   .catch((err) => {console.log(err.message);});
 };
