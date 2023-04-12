@@ -1,6 +1,17 @@
 import React from "react";
+import {RawTodoData, TodoData, AppsProps} from './interfaces';
 
-const deleteItem = (url: string) => {
+export const get_all = (url: string) => {
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // Handle data
+    });
+};
+
+export const deleteItem = (url: string) => {
   console.log("deleteItem -> url is ", url);
   fetch(url, {
     method: 'DELETE',
@@ -19,4 +30,40 @@ const deleteItem = (url: string) => {
   });
 };
 
-export default deleteItem;
+export const add_todo = (url: string, newtodo: RawTodoData) => {
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(newtodo),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("------------add_todo returned data is");
+    // Handle data
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
+
+export const update_todo = (url: string, todo: RawTodoData) => {
+  console.log("update_todo and url is ", url);
+  console.log("update_todo and TODO is ", JSON.stringify(todo));
+  fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(todo),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("PUT data is");
+    console.log(data);
+    // Handle data
+  })
+  .catch((err) => {console.log(err.message);});
+};
