@@ -3,6 +3,7 @@ import Banner from './Banner';
 import ListOrEditPage from './list_or_edit_page';
 import './App.css';
 import {RawTodoData, TodoData, AppsProps} from './interfaces';
+import {get_all, update_todo} from './fetch';
 
 function App() {
   const new_edit_id = "-1";

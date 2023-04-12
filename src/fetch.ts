@@ -10,7 +10,11 @@ export const get_all = (url: string) => {
       // Handle data
       console.log("get_all data is ");
       console.log(data.data);
-      return data.data;
+
+      let retdata = data.data;
+      console.log("get_all retdata is ");
+      console.log(retdata);
+      return retdata;
     })
    .catch((err) => {console.log(err.message);});
 };
