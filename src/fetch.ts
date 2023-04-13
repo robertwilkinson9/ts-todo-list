@@ -1,5 +1,16 @@
 import React from "react";
 import {RawTodoData} from './interfaces';
+import axios from "axios";
+import { useQuery } from "react-query";
+
+const fetchUsers = () =>
+  axios
+    .get("https://jsonplaceholder.typicode.com/users")
+    .then((response) => response.data);
+
+export default function useUsers() {
+  return useQuery("users", fetchUsers);
+}
 
 export const get_all = (url: string) => {
   fetch(url)
@@ -21,20 +32,7 @@ export const get_all = (url: string) => {
 
 export const deleteItem = (url: string) => {
   console.log("deleteItem -> url is ", url);
-  fetch(url, {
-    method: 'DELETE',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("delete data is ");
-    console.log(data.data);
-    // Handle data
-    return data.data;
-  })
-  .catch((err) => {console.log(err.message);});
+  axios.delete(url);
 };
 
 export const add_todo = (url: string, newtodo: RawTodoData) => {
