@@ -52,8 +52,9 @@ function App() {
       console.log(data);
       const id = data.id 
       newtodo._id = id;
-      setEditId(id);
       console.log("ADD_TODO and have just set id to ", id, " and newtodo is ", JSON.stringify(newtodo));
+      setTodos([ ...todos, newtodo ]);
+      setEditId(new_edit_id);
       // Handle data
     })
     .catch((err) => {

@@ -34,7 +34,17 @@ export const deleteItem = (url: string) => {
   axios.delete(url);
 };
 
-export const add_todo = (url: string, newtodo: RawTodoData) => {
+export const add_item = (url: string, newtodo: RawTodoData) => {
+  console.log("add_item and TODO is ", JSON.stringify(newtodo));
+  const context = {headers: {'Content-type': 'application/json; charset=UTF-8'}};
+  axios.post(url, newtodo, context)
+  .then((response) => {
+    console.log("add_item and RESPONSE is ", JSON.stringify(response));
+    return response;
+  })
+  .catch(err => console.log(err));
+
+{ /*
   fetch(url, {
     method: 'POST',
     body: JSON.stringify(newtodo),
@@ -50,6 +60,7 @@ export const add_todo = (url: string, newtodo: RawTodoData) => {
     return data.data;
   })
   .catch((err) => {console.log(err.message);});
+*/ }
 };
 
 export const update_todo = (url: string, todo: RawTodoData) => {
