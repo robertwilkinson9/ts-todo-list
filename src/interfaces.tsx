@@ -8,6 +8,10 @@ export interface TodoData extends RawTodoData {
   _id?: string;
 }
 
+export interface fetchTodosType {
+  (url: string): TodoData[] | null;
+}
+
 export interface GetTodos {
   (): void;
 }

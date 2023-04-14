@@ -1,4 +1,3 @@
-import React from "react";
 import {RawTodoData} from './interfaces';
 import axios from "axios";
 import { useQuery } from "react-query";
