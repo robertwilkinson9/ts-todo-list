@@ -6,8 +6,8 @@ const ListOrEditPage = (props: ListOrEditProps) => {
       console.log("ListOrEditPage TODOS are ", JSON.stringify(props.todos));
       console.log("ListOrEditPage PROPS are ", JSON.stringify(props));
       if (props.edit_mode) {
-        const edit_id = props.edit_id;
         let todo:TodoData = {due : "", summary: "", text: ""}; 
+        const edit_id = props.edit_id;
         if ((edit_id !== undefined) && (edit_id !== "-1")) {
           const found_todo = props.todos.find(todo => {return todo._id === edit_id});
           if (found_todo !== undefined) {

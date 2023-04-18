@@ -3,13 +3,7 @@ import "./todoList.css"
 import {TodoListProps} from "./interfaces";
 
 const TodoList = (props: TodoListProps) => {
-  //console.log("TODO LIST todos is ", JSON.stringify(props.todos));
-
   const sorted_todos = props.todos.sort((a,b)  => (a.due > b.due) ? 1 : -1);
-
-  const UpdateEditMode = (props: TodoListProps) => {
-    props.seteditmode(true);
-  };
 
   return (
     <>
@@ -27,14 +21,10 @@ const TodoList = (props: TodoListProps) => {
           </tr>
         </thead>
         <tbody>
-{ /*
-	  <DisplayTodos todos={props.todos} setter={props.setter} edit_id={props.edit_id} seteditmode={props.seteditmode} setid={props.setid} getTodos={props.getTodos} />
-          {sorted_todos?.map((todo) => <DisplayTodo key={todo._id} todos={props.todos} todo={todo} setter={props.setter} edit_id={props.edit_id} seteditmode={props.seteditmode} setid={props.setid} getTodos={props.getTodos} /> )}
-*/ }
           {sorted_todos?.map((todo) => <TodoItem key={todo._id} todos={props.todos} todo={todo} setter={props.setter} edit_id={props.edit_id} seteditmode={props.seteditmode} setid={props.setid} getTodos={props.getTodos} /> )}
         </tbody>
       </table>
-      <button className="btn btn-primary" onClick={() => {UpdateEditMode(props)}}>
+      <button className="btn btn-primary" onClick={() => {props.seteditmode(true)}}>
         Add New Item
       </button>
     </>

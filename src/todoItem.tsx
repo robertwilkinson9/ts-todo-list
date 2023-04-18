@@ -1,30 +1,24 @@
 import React from "react";
-import {todoItemProps} from './interfaces';
-import {deleteItem} from './fetch';
+import {_idType, todoItemProps} from './interfaces';
+import {API_url, deleteItem} from './fetch';
 
 const TodoItem = (props: todoItemProps) => {
   console.log("TodoItem props are ", JSON.stringify(props));
   const [edit_id, todo, todos, setTodos] = [props.edit_id, props.todo, props.todos, props.setter]
-  if ((props.edit_id !== undefined) && (props.edit_id !== "-1")) {
-    props.todo._id = props.edit_id;
+  if ((edit_id !== undefined) && (edit_id !== "-1")) { // it is not a new item
+    props.todo._id = edit_id;
   }
   console.log("TodoItem todo ", JSON.stringify(todo));
 
-  // pass these down from App.js - but test for now.
-  const API_url = 'http://localhost:5000/api/';
-  const TODO_url = API_url + 'todo/';
-
   const DeleteMongoTodo = (_id: string) => {
     console.log("DeleteMongoTodo -> ID is ", _id);
-    const delete_TODO_url = TODO_url + _id;
+    const delete_TODO_url = API_url + 'todo/' + _id;
 
     console.log("DeleteMongoTodo -> url is ", delete_TODO_url);
     deleteItem(delete_TODO_url);
   };
 
-  // all the above should be in a top level mongo db file and passed down as props?
-
-  const DeleteTodo = (props: todoItemProps, _id: string | undefined) => {
+  const DeleteTodo = (props: todoItemProps, _id: _idType) => {
     if (_id) {
       console.log("DeleteTodo -> deleting ", _id);
       DeleteMongoTodo(_id);
@@ -33,13 +27,15 @@ const TodoItem = (props: todoItemProps) => {
       console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
       setTodos(newtodos);
     } else {
+      console.log("DeleteTodo props.todos are ", JSON.stringify(props.todos));
+      console.log("DeleteTodo todos are ", JSON.stringify(todos));
       setTodos(props.todos);
     }
   };
 
-  const UpdateEditId = (props: todoItemProps, _id: string | undefined) => {
+  const UpdateEditId = (props: todoItemProps, _id: _idType) => {
     console.log("UpdateEditId -> props are ", JSON.stringify(props));
-    const [todo, setId, setEditMode] = [props.todo, props.setid, props.seteditmode]
+    const [setId, setEditMode] = [props.setid, props.seteditmode]
     if (_id) {
       console.log("UpdateEditId -> _id is ", _id);
       setId(_id);

@@ -2,6 +2,8 @@ import {RawTodoData} from './interfaces';
 import axios from "axios";
 import { useQuery } from "react-query";
 
+export const API_url = 'http://localhost:5000/api/';
+
 const fetchUsers = () =>
   axios
     .get("https://jsonplaceholder.typicode.com/users")

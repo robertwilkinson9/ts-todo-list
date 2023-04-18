@@ -4,8 +4,10 @@ export interface RawTodoData {
   text: string;
 }
 
+export type _idType  = string | undefined;
+
 export interface TodoData extends RawTodoData {
-  _id?: string;
+  _id?: _idType;
 }
 
 export interface fetchTodosType {
@@ -35,7 +37,7 @@ export interface todoItemProps {
   todos: TodoData[];
   setter: SetTodos;
   edit_id?: string;
-  seteditmode: SetEditMode;
+  seteditmode: SetEditModeType;
   setid: SetId;
   getTodos?: GetTodos;
   due?: string;
@@ -47,7 +49,8 @@ export interface UpdateTodos {
  (props: AppsProps): void;
 }
 
-export interface SetEditMode {
+export interface SetEditModeType {
+//  (mode: boolean): React.Dispatch<React.SetStateAction<boolean>>;
   (mode: boolean): void;
 }
 
@@ -67,7 +70,7 @@ export interface TodoListProps {
   edit_id: string;
   todos: TodoData[];
   setter: SetTodos;
-  seteditmode: SetEditMode;
+  seteditmode: SetEditModeType;
   setid: SetId;
   getTodos: GetTodos;
 }
@@ -80,7 +83,7 @@ export interface EditProps {
   todo: TodoData;
   edit_id: string;
   setid: SetId;
-  seteditmode: SetEditMode;
+  seteditmode: SetEditModeType;
   todos: TodoData[];
   updater: UpdateTodos;
 }
@@ -91,7 +94,7 @@ export interface FormEditProps extends EditProps {
 
 export interface ListOrEditProps {
   edit_mode: boolean;
-  seteditmode: SetEditMode;
+  seteditmode: SetEditModeType;
   todos: TodoData[];
   setter: SetTodos;
   add_todo: AddTodo;
