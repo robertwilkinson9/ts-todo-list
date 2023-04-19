@@ -26,6 +26,23 @@ const Edit = (props: EditProps) => {
     console.log("text is ", text);
   };
   
+{ /*
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.id === "due") {
+      setDuedate(event.target.value);
+      console.log("due is ", due);
+    }
+    if (event.target.id === "summary") {
+      setSummary(event.target.value);
+      console.log("summary is ", summary);
+    }
+    if (event.target.id === "text") {
+      setText(event.target.value);
+      console.log("text is ", text);
+    }
+  };
+*/ }
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = event.currentTarget
