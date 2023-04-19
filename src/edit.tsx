@@ -12,22 +12,6 @@ const Edit = (props: EditProps) => {
 
   console.log("DUE is ", due, ", SUMMARY is ", summary, ",TEXT is ", text);
 
-{ /*
-  const handleDuedate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDuedate(event.target.value);
-  };
-  
-  const handleSummary = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSummary(event.target.value);
-    console.log("summary is ", summary);
-  };
-  
-  const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
-    console.log("text is ", text);
-  };
-*/ }
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.id === "due") {
       setDuedate(event.target.value);
@@ -49,8 +33,6 @@ const Edit = (props: EditProps) => {
     console.log("PERINT event.target ");
     console.log("event -> ", event);
     console.log("event.currentTarget -> ", event.currentTarget);
-//    const due = (event.currentTarget.elements.namedItem('due')  as HTMLInputElement).value;
-//    console.log("DUE -> ", due);
     const submit_value = (event.currentTarget.elements[3] as HTMLInputElement).value; // 4th element we want the value of the submit button
     console.log("SUBMIT_VALUE -> ", submit_value);
     if (submit_value === "cancel") {
@@ -76,15 +58,6 @@ const Edit = (props: EditProps) => {
 	  <form onSubmit={handleSubmit}>
           <table><tbody>
            <tr><td>
-{ /*
-          <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleDuedate}/>
-           </td></tr>
-           <tr><td>
-          <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" value={summary} onChange={handleSummary} />
-           </td></tr>
-           <tr><td>
-          <label htmlFor="text">Text</label></td><td><input type ="text" id="text" value={text} onChange={handleText} />
-*/ }
           <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleChange}/>
            </td></tr>
            <tr><td>
