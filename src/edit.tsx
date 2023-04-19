@@ -4,7 +4,7 @@ import './edit.css';
 
 const Edit = (props: EditProps) => {
   console.log("Edit START PROPS are ", JSON.stringify(props));
-  const [initDT, initSumm, initText, edit_id, setid, seteditmode, todos, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.edit_id, props.setid, props.seteditmode, props.todos, props.updater];
+  const [initDT, initSumm, initText, edit_id, setid, seteditmode, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.edit_id, props.setid, props.seteditmode, props.updater];
 
   const [due, setDuedate] = React.useState(initDT);
   const [summary, setSummary] = React.useState(initSumm);
@@ -12,6 +12,7 @@ const Edit = (props: EditProps) => {
 
   console.log("DUE is ", due, ", SUMMARY is ", summary, ",TEXT is ", text);
 
+{ /*
   const handleDuedate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDuedate(event.target.value);
   };
@@ -25,9 +26,9 @@ const Edit = (props: EditProps) => {
     setText(event.target.value);
     console.log("text is ", text);
   };
+*/ }
   
-{ /*
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.id === "due") {
       setDuedate(event.target.value);
       console.log("due is ", due);
@@ -41,11 +42,10 @@ const Edit = (props: EditProps) => {
       console.log("text is ", text);
     }
   };
-*/ }
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = event.currentTarget
+//    const form = event.currentTarget
     console.log("PERINT event.target ");
     console.log("event -> ", event);
     console.log("event.currentTarget -> ", event.currentTarget);
@@ -76,6 +76,7 @@ const Edit = (props: EditProps) => {
 	  <form onSubmit={handleSubmit}>
           <table><tbody>
            <tr><td>
+{ /*
           <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleDuedate}/>
            </td></tr>
            <tr><td>
@@ -83,6 +84,14 @@ const Edit = (props: EditProps) => {
            </td></tr>
            <tr><td>
           <label htmlFor="text">Text</label></td><td><input type ="text" id="text" value={text} onChange={handleText} />
+*/ }
+          <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleChange}/>
+           </td></tr>
+           <tr><td>
+          <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" value={summary} onChange={handleChange} />
+           </td></tr>
+           <tr><td>
+          <label htmlFor="text">Text</label></td><td><input type ="text" id="text" value={text} onChange={handleChange} />
            </td></tr>
           </tbody></table>
 	  <button type="submit" value="submit">Add Todo Item</button>
