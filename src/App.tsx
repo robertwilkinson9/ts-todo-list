@@ -10,7 +10,7 @@ function App() {
   const [todos, setTodos] = useState<TodoData[]>([]);
   const [edit_id, setEditId] = useState<string>(new_edit_id);
   const [edit_mode, setEditMode] = useState<boolean>(false);
-  const API_url = 'http://localhost:5000/api/';
+  const API_url = 'http://localhost:5178/api/';
   const TODO_url = API_url + 'todo/';
 
   //console.log("before useEffect App and TODOS are ", JSON.stringify(todos));
