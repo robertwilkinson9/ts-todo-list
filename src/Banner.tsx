@@ -1,5 +1,5 @@
 import './Banner.css';
-import image from "./sticky-todo.jpg";
+import image from "./images/sticky-todo.jpg";
 
 function Banner() {
   return (

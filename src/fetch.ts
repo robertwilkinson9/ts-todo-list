@@ -45,24 +45,6 @@ export const add_item = (url: string, newtodo: RawTodoData) => {
     return response;
   })
   .catch(err => console.log(err));
-
-{ /*
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(newtodo),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("------------add_todo returned data is");
-    // Handle data
-    console.log(data.data);
-    return data.data;
-  })
-  .catch((err) => {console.log(err.message);});
-*/ }
 };
 
 export const update_todo = (url: string, todo: RawTodoData) => {
