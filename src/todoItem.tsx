@@ -3,7 +3,7 @@ import {_idType, todoItemProps} from './interfaces';
 import {API_url, deleteItem} from './fetch';
 
 const TodoItem = (props: todoItemProps) => {
-  console.log("TodoItem props are ", JSON.stringify(props));
+//  console.log("TodoItem props are ", JSON.stringify(props));
   const [edit_id, todo, todos, setTodos] = [props.edit_id, props.todo, props.todos, props.setter]
   if ((edit_id !== undefined) && (edit_id !== "-1")) { // it is not a new item
     props.todo._id = edit_id;

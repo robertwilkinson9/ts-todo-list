@@ -17,7 +17,7 @@ function App() {
 
   const get_todos = () => {
     // Change this endpoint to whatever local or online address you have
-    const TODOS_url = API_url + 'todos/';
+    const TODOS_url = API_url + 'all_todos/';
 
     fetch(TODOS_url)
       .then((response) => {
