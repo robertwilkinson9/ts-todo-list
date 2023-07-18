@@ -1,29 +1,16 @@
 import React from "react";
-import {_idType, todoItemProps} from './interfaces';
-import {API_url, deleteItem} from './fetch';
+import {todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
 //  console.log("TodoItem props are ", JSON.stringify(props));
-  const [edit_id, todo, todos, setTodos] = [props.edit_id, props.todo, props.todos, props.setter]
-  if ((edit_id !== undefined) && (edit_id !== "-1")) { // it is not a new item
-    props.todo._id = edit_id;
-  }
+  const [todo, todos, setTodos] = [props.todo, props.todos, props.setter]
   console.log("TodoItem todo ", JSON.stringify(todo));
 
-  const DeleteMongoTodo = (_id: string) => {
-    console.log("DeleteMongoTodo -> ID is ", _id);
-    const delete_TODO_url = API_url + 'todo/' + _id;
-
-    console.log("DeleteMongoTodo -> url is ", delete_TODO_url);
-    deleteItem(delete_TODO_url);
-  };
-
-  const DeleteTodo = (props: todoItemProps, _id: _idType) => {
-    if (_id) {
-      console.log("DeleteTodo -> deleting ", _id);
-      DeleteMongoTodo(_id);
+  const DeleteTodo = (props: todoItemProps, due: string) => {
+    if (due) {
+      console.log("DeleteTodo -> deleting ", due);
       console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
-      const newtodos = todos.filter(todo => {return todo._id !== _id});
+      const newtodos = todos.filter(todo => {return todo.due !== due});
       console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
       setTodos(newtodos);
     } else {
@@ -33,14 +20,10 @@ const TodoItem = (props: todoItemProps) => {
     }
   };
 
-  const UpdateEditId = (props: todoItemProps, _id: _idType) => {
-    console.log("UpdateEditId -> props are ", JSON.stringify(props));
-    const [setId, setEditMode] = [props.setid, props.seteditmode]
-    if (_id) {
-      console.log("UpdateEditId -> _id is ", _id);
-      setId(_id);
-    }
-    setEditMode(true);
+  const UpdateEditMode = (props: todoItemProps, due: string) => {
+    console.log("UpdateEditMode -> props are ", JSON.stringify(props));
+    props.seteditmode(true);
+    props.seteditdue(due);
   };
 
   return (
@@ -49,10 +32,10 @@ const TodoItem = (props: todoItemProps) => {
       <td>{todo.summary}</td>
       <td>{todo.text}</td>
       <td>
-         <button className="btn btn-primary" onClick={() => DeleteTodo(props, todo._id)}>Delete</button>
+         <button className="btn btn-primary" onClick={() => DeleteTodo(props, todo.due)}>Delete</button>
       </td>
       <td>
-        <button className="btn btn-primary" onClick={() => UpdateEditId(props, todo._id)}>Edit</button>
+        <button className="btn btn-primary" onClick={() => UpdateEditMode(props, todo.due)}>Edit</button>
       </td>
     </tr>
   );

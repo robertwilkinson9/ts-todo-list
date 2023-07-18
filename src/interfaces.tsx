@@ -1,13 +1,7 @@
-export interface RawTodoData {
+export interface TodoData {
   due: string;
   summary: string;
   text: string;
-}
-
-export type _idType  = string | undefined;
-
-export interface TodoData extends RawTodoData {
-  _id?: _idType;
 }
 
 export interface fetchTodosType {
@@ -23,12 +17,11 @@ export interface SetTodos {
 }
 
 export interface AddTodo {
-  (Todo: RawTodoData): void;
+  (Todo: TodoData): void;
 }
 
 export interface AppsProps {
-  edit_id: string;
-  todo: TodoData | RawTodoData;
+  todo: TodoData;
   todos: TodoData[];
 }
 
@@ -36,9 +29,8 @@ export interface todoItemProps {
   todo: TodoData;
   todos: TodoData[];
   setter: SetTodos;
-  edit_id?: string;
   seteditmode: SetEditModeType;
-  setid: SetId;
+  seteditdue: SetEditDueType;
   getTodos?: GetTodos;
   due?: string;
   summary?: string;
@@ -54,12 +46,12 @@ export interface SetEditModeType {
   (mode: boolean): void;
 }
 
-export interface SetId {
-  (id: string): void;
+export interface SetEditDueType {
+  (due: string): void;
 }
 
 export interface DeleteProps {
-  id: string;
+  due: string;
 }
 
 export interface BannerProps {
@@ -67,11 +59,10 @@ export interface BannerProps {
 }
 
 export interface TodoListProps {
-  edit_id: string;
   todos: TodoData[];
   setter: SetTodos;
   seteditmode: SetEditModeType;
-  setid: SetId;
+  seteditdue: SetEditDueType;
   getTodos: GetTodos;
 }
 
@@ -81,8 +72,6 @@ export interface DisplayTodoProps extends TodoListProps{
 
 export interface EditProps {
   todo: TodoData;
-  edit_id: string;
-  setid: SetId;
   seteditmode: SetEditModeType;
   todos: TodoData[];
   updater: UpdateTodos;
@@ -93,13 +82,13 @@ export interface FormEditProps extends EditProps {
 }
 
 export interface ListOrEditProps {
+  edit_due: string;
   edit_mode: boolean;
   seteditmode: SetEditModeType;
+  seteditdue: SetEditDueType;
   todos: TodoData[];
   setter: SetTodos;
   add_todo: AddTodo;
   updater: UpdateTodos;
-  edit_id: string;
-  setid: SetId;
   getTodos: GetTodos;
 }
