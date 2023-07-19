@@ -28,9 +28,10 @@ function App() {
   console.log("after useEffect App and TODOS are ", JSON.stringify(todos));
 
   const add_todo = (newtodo: TodoData) => {
-    console.log("ADD_TODO and before delete newtodo is ", JSON.stringify(newtodo));
+    console.log("ADD_TODO and newtodo is ", JSON.stringify(newtodo));
+    console.log([ ...todos, newtodo ]);
+    localStorage.setItem('todos',JSON.stringify([ ...todos, newtodo ]));
     setTodos([ ...todos, newtodo ]);
-    localStorage.setItem('todos',JSON.stringify(todos));
   };
 
   const value_exists_in_object = (object: TodoData, dt: string) => {
@@ -56,7 +57,12 @@ function App() {
     if (value_exists_in_object_list(todos, todo.due)) {
       console.log("App onUpdate and NOT NEW TODO");
       console.log("App onUpdate and TODO is ", JSON.stringify(todo));
-      setTodos(props.todos);
+      const due = todo.due;
+      const newtodos:TodoData[] = todos.filter(todo => {return todo.due !== due});
+      console.log("App onUpdate -> newdos are ", JSON.stringify(newtodos));
+      newtodos.push(todo);
+      setTodos(newtodos);
+      localStorage.setItem('todos',JSON.stringify(newtodos));
     } else {
       console.log("App onUpdate and NEW TODO");
       const due = todo.due;
@@ -65,7 +71,6 @@ function App() {
       add_todo({due: due, summary: summary, text: text});
     } 
     setEditMode(false);      
-    setTodos(props.todos);
     console.log("App onUpdate at end of function TODOS are ", JSON.stringify(todos));
   };
 

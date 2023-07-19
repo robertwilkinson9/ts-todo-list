@@ -13,6 +13,7 @@ const TodoItem = (props: todoItemProps) => {
       const newtodos = todos.filter(todo => {return todo.due !== due});
       console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
       setTodos(newtodos);
+      localStorage.setItem('todos',JSON.stringify(newtodos));
     } else {
       console.log("DeleteTodo props.todos are ", JSON.stringify(props.todos));
       console.log("DeleteTodo todos are ", JSON.stringify(todos));
