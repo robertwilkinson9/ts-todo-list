@@ -24,7 +24,7 @@ const TodoList = (props: TodoListProps) => {
           {sorted_todos?.map((todo) => <TodoItem key={todo.due} todos={props.todos} todo={todo} setter={props.setter} seteditmode={props.seteditmode} seteditdue={props.seteditdue} getTodos={props.getTodos} /> )}
         </tbody>
       </table>
-      <button className="btn btn-primary" onClick={() => {props.seteditmode(true)}}>
+      <button className="btn btn-primary" onClick={() => {props.seteditmode(true); props.seteditdue("")}}>
         Add New Item
       </button>
     </>

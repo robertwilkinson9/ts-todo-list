@@ -3,7 +3,7 @@ import {todoItemProps} from './interfaces';
 
 const TodoItem = (props: todoItemProps) => {
   console.log("TodoItem props are ", JSON.stringify(props));
-  const [todo, todos, setTodos] = [props.todo, props.todos, props.setter]
+  const [todo, todos] = [props.todo, props.todos]
 
   const DeleteTodo = (props: todoItemProps, due: string) => {
     if (due) {
@@ -11,12 +11,7 @@ const TodoItem = (props: todoItemProps) => {
       console.log("DeleteTodo -> todos are ", JSON.stringify(todos));
       const newtodos = todos.filter(todo => {return todo.due !== due});
       console.log("DeleteTodo -> newtodos are ", JSON.stringify(newtodos));
-      setTodos(newtodos);
-      localStorage.setItem('todos',JSON.stringify(newtodos));
-//    } else {
-//      console.log("DeleteTodo props.todos are ", JSON.stringify(props.todos));
-//      console.log("DeleteTodo todos are ", JSON.stringify(todos));
-//      setTodos(props.todos);
+      props.setter(newtodos);
     }
   };
 

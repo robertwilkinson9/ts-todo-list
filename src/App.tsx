@@ -21,6 +21,16 @@ function App() {
     }
   };
 
+  const put_todos = (newtodos: TodoData[]) => {
+    // we use the todos object in memory, and serialise to localstorage each time we update,
+    // because we need them to be synchronised. We only read localstorage when we start up
+
+    console.log("IN PUT_TODOS AND NEWTODOS ARE ");
+    console.log(newtodos);
+    setTodos(newtodos);
+    localStorage.setItem('todos',JSON.stringify(newtodos));
+  };
+
   console.log("before useEffect App and TODOS are ", JSON.stringify(todos));
   useEffect(() => {
       get_todos();
@@ -29,9 +39,7 @@ function App() {
 
   const add_todo = (newtodo: TodoData) => {
     console.log("ADD_TODO and newtodo is ", JSON.stringify(newtodo));
-    console.log([ ...todos, newtodo ]);
-    localStorage.setItem('todos',JSON.stringify([ ...todos, newtodo ]));
-    setTodos([ ...todos, newtodo ]);
+    put_todos([ ...todos, newtodo]);
   };
 
   const value_exists_in_object = (object: TodoData, dt: string) => {
@@ -61,8 +69,7 @@ function App() {
       const newtodos:TodoData[] = todos.filter(todo => {return todo.due !== due});
       console.log("App onUpdate -> newdos are ", JSON.stringify(newtodos));
       newtodos.push(todo);
-      setTodos(newtodos);
-      localStorage.setItem('todos',JSON.stringify(newtodos));
+      put_todos(newtodos);
     } else {
       console.log("App onUpdate and NEW TODO");
       const due = todo.due;
@@ -77,7 +84,7 @@ function App() {
   return (
     <div>
       <Banner /> 
-      <ListOrEditPage edit_due={edit_due} seteditdue={setEditDue} edit_mode={edit_mode} seteditmode={setEditMode} todos={todos} setter={setTodos} add_todo={add_todo} updater={onUpdate} getTodos={get_todos} />
+      <ListOrEditPage edit_due={edit_due} seteditdue={setEditDue} edit_mode={edit_mode} seteditmode={setEditMode} todos={todos} setter={put_todos} add_todo={add_todo} updater={onUpdate} getTodos={get_todos} />
     </div>
   );
 }
