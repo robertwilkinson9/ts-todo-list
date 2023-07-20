@@ -25,18 +25,6 @@ export interface AppsProps {
   todos: TodoData[];
 }
 
-export interface todoItemProps {
-  todo: TodoData;
-  todos: TodoData[];
-  setter: SetTodos;
-  seteditmode: SetEditModeType;
-  seteditdue: SetEditDueType;
-  getTodos?: GetTodos;
-  due?: string;
-  summary?: string;
-  text?: string;
-}
-
 export interface UpdateTodos {
  (props: AppsProps): void;
 }
@@ -66,7 +54,7 @@ export interface TodoListProps {
   getTodos: GetTodos;
 }
 
-export interface DisplayTodoProps extends TodoListProps{
+export interface todoItemProps extends TodoListProps{
   todo: TodoData;
 }
 
@@ -77,18 +65,9 @@ export interface EditProps {
   updater: UpdateTodos;
 }
 
-export interface FormEditProps extends EditProps {
-  index: string;
-}
-
-export interface ListOrEditProps {
+export interface ListOrEditProps extends TodoListProps {
   edit_due: string;
   edit_mode: boolean;
-  seteditmode: SetEditModeType;
-  seteditdue: SetEditDueType;
-  todos: TodoData[];
-  setter: SetTodos;
   add_todo: AddTodo;
   updater: UpdateTodos;
-  getTodos: GetTodos;
 }
