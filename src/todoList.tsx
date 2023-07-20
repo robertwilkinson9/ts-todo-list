@@ -21,7 +21,7 @@ const TodoList = (props: TodoListProps) => {
           </tr>
         </thead>
         <tbody>
-          {sorted_todos?.map((todo) => <TodoItem key={todo._id} todos={props.todos} todo={todo} setter={props.setter} edit_id={props.edit_id} seteditmode={props.seteditmode} setid={props.setid} getTodos={props.getTodos} /> )}
+          {sorted_todos?.map((todo) => <TodoItem key={todo.due} todos={props.todos} todo={todo} setter={props.setter} seteditmode={props.seteditmode} seteditdue={props.seteditdue} getTodos={props.getTodos} /> )}
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={() => {props.seteditmode(true)}}>
