@@ -50,7 +50,7 @@ const Edit = (props: EditProps) => {
     }
   }
   return (
-	  <>
+  <>
     <div className="edit">
 	  <form onSubmit={handleSubmit}>
           <table><tbody>
@@ -68,7 +68,7 @@ const Edit = (props: EditProps) => {
           <button type="submit" value="cancel">Cancel</button>
 	  </form>
     </div>
-	  </>
+  </>
   );
 }
 
