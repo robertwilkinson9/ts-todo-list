@@ -9,7 +9,7 @@ const Edit = (props: EditProps) => {
 
   const initDT = (typeof props.todo !== "undefined" && typeof props.todo.due !== "undefined") ? props.todo.due : "";
   const initSumm = (typeof props.todo !== "undefined" && typeof props.todo.summary !== "undefined") ? props.todo.summary : "";
-  const initText = (typeof props.todo !== "undefined" && typeof props.text.due !== "undefined") ? props.todo.text : "";
+  const initText = (typeof props.todo !== "undefined" && typeof props.todo.text !== "undefined") ? props.todo.text : "";
 
   const [due, setDuedate] = React.useState(initDT);
   const [summary, setSummary] = React.useState(initSumm);
@@ -60,13 +60,13 @@ const Edit = (props: EditProps) => {
 	  <form data-testid="edit-form" onSubmit={handleSubmit}>
           <table><tbody>
            <tr><td>
-          <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleChange}/>
+          <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" data-testid="due" value={due} onChange={handleChange}/>
            </td></tr>
            <tr><td>
-          <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" value={summary} onChange={handleChange} />
+          <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" data-testid="summary" value={summary} onChange={handleChange} />
            </td></tr>
            <tr><td>
-          <label htmlFor="text">Text</label></td><td><input type ="text" id="text" value={text} onChange={handleChange} />
+          <label htmlFor="text">Text</label></td><td><input type ="text" id="text" data-testid="text" value={text} onChange={handleChange} />
            </td></tr>
           </tbody></table>
 	  <button type="submit" value="submit">Add Todo Item</button>
