@@ -4,7 +4,12 @@ import './edit.css';
 
 const Edit = (props: EditProps) => {
   console.log("Edit START PROPS are ", JSON.stringify(props));
-  const [initDT, initSumm, initText, seteditmode, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.seteditmode, props.updater];
+//  const [initDT, initSumm, initText, seteditmode, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.seteditmode, props.updater];
+  const [seteditmode, updater] = [props.seteditmode, props.updater];
+
+  const initDT = (typeof props.todo !== "undefined" && typeof props.todo.due !== "undefined") ? props.todo.due : "";
+  const initSumm = (typeof props.todo !== "undefined" && typeof props.todo.summary !== "undefined") ? props.todo.summary : "";
+  const initText = (typeof props.todo !== "undefined" && typeof props.text.due !== "undefined") ? props.todo.text : "";
 
   const [due, setDuedate] = React.useState(initDT);
   const [summary, setSummary] = React.useState(initSumm);
@@ -52,7 +57,7 @@ const Edit = (props: EditProps) => {
   return (
   <>
     <div className="edit">
-	  <form onSubmit={handleSubmit}>
+	  <form data-testid="edit-form" onSubmit={handleSubmit}>
           <table><tbody>
            <tr><td>
           <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" value={due} onChange={handleChange}/>
