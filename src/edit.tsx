@@ -4,7 +4,6 @@ import './edit.css';
 
 const Edit = (props: EditProps) => {
   console.log("Edit START PROPS are ", JSON.stringify(props));
-//  const [initDT, initSumm, initText, seteditmode, updater] = [props.todo.due, props.todo.summary, props.todo.text, props.seteditmode, props.updater];
   const [seteditmode, updater] = [props.seteditmode, props.updater];
 
   const initDT = (typeof props.todo !== "undefined" && typeof props.todo.due !== "undefined") ? props.todo.due : "";
@@ -18,7 +17,12 @@ const Edit = (props: EditProps) => {
   console.log("DUE is ", due, ", SUMMARY is ", summary, ",TEXT is ", text);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log("handleChange CaLlEd wIt event.target.id of ")
+    console.log(event.target.id);
+    console.log("handleChange CaLlEd wIt event.target.value of ")
+    console.log(event.target.value);
     if (event.target.id === "due") {
+      console.log(`DUE iS ${event.target.value}`);
       setDuedate(event.target.value);
       console.log("due is ", due);
     }

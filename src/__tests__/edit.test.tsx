@@ -9,11 +9,12 @@ import Edit from '../edit';
 
 function renderEditForm(props: Partial<EditProps> = {}) {
   const defaultProps: EditProps = {
-    onDueChange() {
-      console.log("Dummy onDueChange INVOKED");
+    handleChange() {
+      console.log("Dummy handleChange INVOKED");
       return;
     },
 
+/*
     onSummaryChange() {
       return;
     },
@@ -21,11 +22,18 @@ function renderEditForm(props: Partial<EditProps> = {}) {
     onTextChange() {
       return;
     },
+*/
 
     onSubmit() {
       return;
     },
   };
+
+  
+  console.log("Dummy defaultProps are ");
+  console.log(defaultProps);
+  console.log("Dummy props are ");
+  console.log(props);
 
   return render(<Edit {...defaultProps} {...props} />);
 }
@@ -66,52 +74,4 @@ describe("<Edit />", () => {
     expect(editForm).toHaveFormValues({
     });
   });
-
-/*
-      due: "",
-      summary: "",
-      text: ""
-
-  test("should allow entering a due date", async () => {
-    const onDueChange = jest.fn();
-    const { findByTestId } = renderEditForm({ onDueChange });
-    const due = await findByTestId("due");
-    fireEvent.change(due, { target: { value: "2099-12-31T23:59" } });
-    expect(onDueChange).toHaveBeenCalledWith("2099-12-31T23:59");
-  });
-
-*/
-
-  test("should allow entering a due date", async () => {
-    const onDueChange = jest.fn();
-    const { findByTestId } = renderEditForm({ onDueChange });
-    const due_date = await findByTestId("due");
-/*
-    console.log("DUE DATE IS ");
-    console.log(due_date);
-*/
-    fireEvent.change(due_date, { target: { value: "2099-12-31T23:59" } });
-    expect(onDueChange).toHaveBeenCalledTimes(1)
-//    expect(onDueChange).toHaveBeenCalledWith("2099-12-31T23:59");
-  });
-
-
-/*
-test("should allow entering a password", async () => {
-
-  const onPasswordChange = jest.fn();
-
-  const { findByTestId } = renderLoginForm({ onPasswordChange });
-
-  const username = await findByTestId("password");
-
-
-  fireEvent.change(username, { target: { value: "password" } });
-
-
-  expect(onPasswordChange).toHaveBeenCalledWith("password");
-
-});
-*/
-
 });
