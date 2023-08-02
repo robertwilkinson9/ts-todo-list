@@ -22,7 +22,7 @@ const TodoItem = (props: todoItemProps) => {
   };
 
   return (
-    <tr>
+    <tr data-testid="todoitem" >
       <td>{todo.due}</td>
       <td>{todo.summary}</td>
       <td>{todo.text}</td>
