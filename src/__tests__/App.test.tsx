@@ -13,3 +13,9 @@ test('Outstanding Things to do', () => {
   expect(linkElement).toBeInTheDocument();
 //  expect(linkElement).toBeInTheDocument();
 });
+
+test('We have the app div element', async () => {
+  const { findByTestId } = render(<App />);
+  const appdivelement = await findByTestId("appdiv");
+  expect(appdivelement).toBeInTheDocument();
+});

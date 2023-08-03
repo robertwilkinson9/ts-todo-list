@@ -82,7 +82,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div data-testid="appdiv">
       <Banner /> 
       <ListOrEditPage edit_due={edit_due} seteditdue={setEditDue} edit_mode={edit_mode} seteditmode={setEditMode} todos={todos} setter={put_todos} add_todo={add_todo} updater={onUpdate} getTodos={get_todos} />
     </div>
