@@ -9,11 +9,11 @@ const Edit = (props: EditProps) => {
   const initDT = (typeof props.todo !== "undefined" && typeof props.todo.due !== "undefined") ? props.todo.due : "";
   const initSumm = (typeof props.todo !== "undefined" && typeof props.todo.summary !== "undefined") ? props.todo.summary : "";
   const initText = (typeof props.todo !== "undefined" && typeof props.todo.text !== "undefined") ? props.todo.text : "";
+  console.log("INITDT is ", initDT, ", INITSUMM is ", initSumm, ",INITTEXT is ", initText);
 
   const [due, setDuedate] = React.useState(initDT);
   const [summary, setSummary] = React.useState(initSumm);
   const [text, setText] = React.useState(initText);
-
   console.log("DUE is ", due, ", SUMMARY is ", summary, ",TEXT is ", text);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -38,11 +38,9 @@ const Edit = (props: EditProps) => {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log("PRINT event.target ");
-    console.log("event -> ", event);
-    console.log("event.currentTarget -> ", event.currentTarget);
     const submit_value = (event.currentTarget.elements[3] as HTMLInputElement).value; // 4th element we want the value of the submit button
     console.log("SUBMIT_VALUE -> ", submit_value);
+    console.log("handleSubmit PROPS is ", JSON.stringify(props));
     if (submit_value === "cancel") {
       console.log("Edit handleSubmit CANCEL PROPS is ", JSON.stringify(props));
       seteditmode(false)
@@ -63,18 +61,15 @@ const Edit = (props: EditProps) => {
     <div className="edit">
 	  <form data-testid="edit-form" onSubmit={handleSubmit}>
           <table><tbody>
-           <tr><td>
-          <label htmlFor="due">Datetime</label></td><td><input type ="text" id="due" data-testid="due" value={due} onChange={handleChange}/>
-           </td></tr>
-           <tr><td>
-          <label htmlFor="summary">Summary</label></td><td><input type ="text" id="summary" data-testid="summary" value={summary} onChange={handleChange} />
-           </td></tr>
-           <tr><td>
-          <label htmlFor="text">Text</label></td><td><input type ="text" id="text" data-testid="text" value={text} onChange={handleChange} />
-           </td></tr>
+           <tr><td><label htmlFor="due">Datetime</label></td>
+           <td><input type="text" id="due" data-testid="due" value={due} onChange={handleChange}/></td></tr>
+           <tr><td><label htmlFor="summary">Summary</label></td>
+           <td><input type="text" id="summary" data-testid="summary" value={summary} onChange={handleChange}/></td></tr>
+           <tr><td><label htmlFor="text">Text</label></td>
+           <td><input type="text" id="text" data-testid="text" value={text} onChange={handleChange}/></td></tr>
           </tbody></table>
-	  <button type="submit" value="submit">Add Todo Item</button>
-          <button type="submit" value="cancel">Cancel</button>
+	  <button data-testid="edit_submit" type="submit" value="submit">Add Todo Item</button>
+          <button data-testid="edit_cancel" type="submit" value="cancel">Cancel</button>
 	  </form>
     </div>
   </>

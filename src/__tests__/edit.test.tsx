@@ -1,40 +1,16 @@
 import React from "react";
 
-import { render, fireEvent, waitForElement } from "@testing-library/react";
-
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent, waitForElement } from "@testing-library/react";
 
 import {EditProps} from '../interfaces';
 import Edit from '../edit';
 
 function renderEditForm(props: Partial<EditProps> = {}) {
-  const defaultProps: EditProps = {
-    handleChange() {
-      console.log("Dummy handleChange INVOKED");
-      return;
-    },
-
-/*
-    onSummaryChange() {
-      return;
-    },
-
-    onTextChange() {
-      return;
-    },
-*/
-
-    onSubmit() {
-      return;
-    },
-  };
-
+  const defaultProps: EditProps = {};
   
-  console.log("Dummy defaultProps are ");
-  console.log(defaultProps);
-  console.log("Dummy props are ");
-  console.log(props);
-
   return render(<Edit {...defaultProps} {...props} />);
 }
 
@@ -69,9 +45,32 @@ describe("<Edit />", () => {
 
   test("should display a party edit form", async () => {
     const { findByTestId } = renderEditForm({todo: non_empty_todo});
-    const editForm = await findByTestId("edit-form");
 
-    expect(editForm).toHaveFormValues({
-    });
+    const input_due = await findByTestId("due");
+    expect(input_due).toHaveDisplayValue(non_empty_todo.due);
+
+    const input_summary = await findByTestId("summary");
+    expect(input_summary).toHaveDisplayValue(non_empty_todo.summary);
+
+    const input_text = await findByTestId("text");
+    expect(input_text).toHaveDisplayValue(non_empty_todo.text);
+  });
+
+  test("should be able to submit a party edit form", async () => {
+    const null_updater = (input) => {};
+
+    const { findByTestId } = renderEditForm({todo: non_empty_todo, todos: [], updater: null_updater});
+
+    const input_due = await findByTestId("due");
+    expect(input_due).toHaveDisplayValue(non_empty_todo.due);
+
+    const input_summary = await findByTestId("summary");
+    expect(input_summary).toHaveDisplayValue(non_empty_todo.summary);
+
+    const input_text = await findByTestId("text");
+    expect(input_text).toHaveDisplayValue(non_empty_todo.text);
+
+    const editSubmit = await findByTestId("edit_submit");
+    await userEvent.click(editSubmit);
   });
 });
